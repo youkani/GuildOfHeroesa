@@ -22,7 +22,48 @@ yaroslav.GainExperience(25);
 Console.WriteLine($"После лечения, Ярослав: {yaroslav.Health}");
 Console.WriteLine($"Опыт Ярослава: {yaroslav.Experience}");
 
-//практическая 1 самостоятельная работа
+bool yaroslavAlive = yaroslav.IsAlive();
+Console.WriteLine($"Ярослав жив: {yaroslavAlive}");
+Console.WriteLine($"Артём жив: {artem.IsAlive()}");
+
+if (yaroslavAlive)
+{
+    Console.WriteLine("Ярослав может продолжать приключение.");
+}
+else
+{
+    Console.WriteLine("Ярослав больше не может сражаться.");
+}
+
+string info = yaroslav.GetInfo();
+Console.WriteLine("Строка получена. Сейчас выведем её:");
+Console.WriteLine(info);
+
+Console.WriteLine();
+Console.WriteLine(anastasia.GetInfo());
+Console.WriteLine();
+Console.WriteLine(artem.GetInfo());
+
+//практическая 2. Самостоятельная работа
+Console.WriteLine();
+Film interstellar = new Film("Интерстеллар", 2014, "Научная фантастика", 8.7);
+
+Console.WriteLine($"Фильм: {interstellar.Name}. Изначальный рейтинг: {interstellar.Rating}");
+
+interstellar.UpdateRating(9.2);
+Console.WriteLine($"Рейтинг после обновления: {interstellar.Rating}");
+
+interstellar.UpdateRating(15.0);
+Console.WriteLine($"Рейтинг после попытки поставить 15.0: {interstellar.Rating}");
+
+//практическая 2. Найдите и исправьте две ошибки
+// yaroslav.TakeDamage(20);
+//"yaroslav.TakeDamage();" В скобках при вызове метода нужно написать аргумент.
+
+// Console.WriteLine(yaroslav.GetInfo());
+//"yaroslav.GetInfo();" Метод возвращает строку с данными но не выводит её.
+
+//практическая 1. Самостоятельная работа
 // Film interstellar = new Film("Интерстеллар", 2014, "Научная фантастика", 8.7);
 // Film shutterIsland = new Film("Остров проклятых", 2009, "Триллер", 8.6);
 // Film spiderMan = new Film("Человек-паук: Новый день", 2026, "Приключения", 7.9);

@@ -5,12 +5,22 @@ public class Film {
     public double Rating;
     public string Status;
 
-    public Film (string name, int data, string genre, double rating)
+    public Film(string name, int data, string genre, double rating)
     {
         Name = name;
         Data = data;
         Genre = genre;
         Rating = rating;
         Status = "Доступен";
+    }
+
+public void UpdateRating(double newRating)
+    {
+        if (newRating < 0 || newRating > 10)
+        {
+            return;
+        }
+
+        Rating = newRating;
     }
 }
