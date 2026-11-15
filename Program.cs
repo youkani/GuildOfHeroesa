@@ -45,9 +45,30 @@ Console.WriteLine();
 Console.WriteLine(artem.GetInfo());
 
 //практическая 2. Самостоятельная работа
-Console.WriteLine();
-Film interstellar = new Film("Интерстеллар", 2014, "Научная фантастика", 8.7);
 
+Film interstellar = new Film("Интерстеллар", 2014, "Научная фантастика", 8.7);
+Film spiderMan = new Film("Человек-паук: Новый день", 2026, "Приключения", 7.9);
+
+interstellar.ChangeStatus("Просмотрен");
+interstellar.ChangeStatus("");
+
+Console.WriteLine();
+Console.WriteLine($"<<Фильм {interstellar.Name}>>");
+Console.WriteLine($"{interstellar.Data} года создания");
+Console.WriteLine($"Жанр: {interstellar.Genre}");
+Console.WriteLine($"Оценка: {interstellar.Rating}./10");
+Console.WriteLine($"доступность: {interstellar.Status}");
+Console.WriteLine($"В топе (рейтинг >= 8.0): {interstellar.IsTopRated()}");
+
+Console.WriteLine();
+Console.WriteLine($"<<Фильм {spiderMan.Name}>>");
+Console.WriteLine($"{spiderMan.Data} года создания");
+Console.WriteLine($"Жанр: {spiderMan.Genre}");
+Console.WriteLine($"Оценка: {spiderMan.Rating}./10");
+Console.WriteLine($"доступность: {spiderMan.Status}");
+Console.WriteLine($"В топе (рейтинг >= 8.0): {spiderMan.IsTopRated()}");
+
+Console.WriteLine();
 Console.WriteLine($"Фильм: {interstellar.Name}. Изначальный рейтинг: {interstellar.Rating}");
 
 interstellar.UpdateRating(9.2);

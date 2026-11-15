@@ -1,4 +1,5 @@
-public class Film {
+public class Film
+{
     public string Name;
     public int Data;
     public string Genre;
@@ -14,7 +15,7 @@ public class Film {
         Status = "Доступен";
     }
 
-public void UpdateRating(double newRating)
+    public void UpdateRating(double newRating)
     {
         if (newRating < 0 || newRating > 10)
         {
@@ -22,5 +23,19 @@ public void UpdateRating(double newRating)
         }
 
         Rating = newRating;
+    }
+
+    public void ChangeStatus(string newStatus)
+    {
+        if (newStatus.Length == 0)
+        {
+            return;
+        }
+        Status = newStatus;
+    }
+
+    public bool IsTopRated()
+    {
+        return Rating >= 8.0;
     }
 }
