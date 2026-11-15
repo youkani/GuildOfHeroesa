@@ -1,17 +1,29 @@
 ﻿Hero yaroslav = new Hero("Ярослав", 100);
 Hero anastasia = new Hero("Анастасия", 90);
 Hero artem = new Hero("Артём", 120);
+//A
+// Hero margarita = new Hero("Маргарита", 80);
+// margarita.TakeDamage(30);
+// margarita.Heal(15);
+// margarita.GainExperience(50);
+// Console.WriteLine($"Маргарита жива: {margarita.IsAlive()}");
+// Console.WriteLine(margarita.GetInfo());
+
+//Б
+// Hero yaroslav = new Hero("Ярослав", 100);
+// Hero anastasia = new Hero("Анастасия", 100);
+// yaroslav.TakeDamage(40);
+// anastasia.TakeDamage(10);
+// Console.WriteLine($"Ярослав: {yaroslav.Health}");
+// Console.WriteLine($"Анастасия: {anastasia.Health}");
 
 Console.WriteLine($"До вызовов: {yaroslav.Health}, {anastasia.Health}, {artem.Health}");
-
 yaroslav.TakeDamage(25);
 anastasia.TakeDamage(30);
-
 Console.WriteLine($"После вызовов: {yaroslav.Health}, {anastasia.Health}, {artem.Health}");
 
 yaroslav.TakeDamage(-20);
 Console.WriteLine($"После неверного урона: {yaroslav.Health}");
-
 artem.TakeDamage(200);
 Console.WriteLine($"После сильного урона, Артём: {artem.Health}");
 
@@ -56,7 +68,7 @@ Console.WriteLine();
 Console.WriteLine($"<<Фильм {interstellar.Name}>>");
 Console.WriteLine($"{interstellar.Data} года создания");
 Console.WriteLine($"Жанр: {interstellar.Genre}");
-Console.WriteLine($"Оценка: {interstellar.Rating}./10");
+Console.WriteLine($"Оценка: {interstellar.Rating}/10");
 Console.WriteLine($"доступность: {interstellar.Status}");
 Console.WriteLine($"В топе (рейтинг >= 8.0): {interstellar.IsTopRated()}");
 
@@ -64,7 +76,7 @@ Console.WriteLine();
 Console.WriteLine($"<<Фильм {spiderMan.Name}>>");
 Console.WriteLine($"{spiderMan.Data} года создания");
 Console.WriteLine($"Жанр: {spiderMan.Genre}");
-Console.WriteLine($"Оценка: {spiderMan.Rating}./10");
+Console.WriteLine($"Оценка: {spiderMan.Rating}/10");
 Console.WriteLine($"доступность: {spiderMan.Status}");
 Console.WriteLine($"В топе (рейтинг >= 8.0): {spiderMan.IsTopRated()}");
 
@@ -92,7 +104,7 @@ Console.WriteLine($"Рейтинг после попытки поставить 
 // Console.WriteLine($"<<Фильм {interstellar.Name}>>");
 // Console.WriteLine($"{interstellar.Data} года создания");
 // Console.WriteLine($"Жанр: {interstellar.Genre}");
-// Console.WriteLine($"Оценка: {interstellar.Rating}./10");
+// Console.WriteLine($"Оценка: {interstellar.Rating}/10");
 // Console.WriteLine($"доступность: {interstellar.Status}");
 
 // Console.WriteLine();
@@ -100,7 +112,7 @@ Console.WriteLine($"Рейтинг после попытки поставить 
 // Console.WriteLine($"<<Фильм {shutterIsland.Name}>>");
 // Console.WriteLine($"{shutterIsland.Data} года создания");
 // Console.WriteLine($"Жанр: {shutterIsland.Genre}");
-// Console.WriteLine($"Оценка: {shutterIsland.Rating}./10");
+// Console.WriteLine($"Оценка: {shutterIsland.Rating}/10");
 // Console.WriteLine($"доступность: {shutterIsland.Status}");
 
 // Console.WriteLine();
@@ -108,5 +120,5 @@ Console.WriteLine($"Рейтинг после попытки поставить 
 // Console.WriteLine($"<<Фильм {spiderMan.Name}>>");
 // Console.WriteLine($"{spiderMan.Data} года создания");
 // Console.WriteLine($"Жанр: {spiderMan.Genre}");
-// Console.WriteLine($"Оценка: {spiderMan.Rating}./10");
+// Console.WriteLine($"Оценка: {spiderMan.Rating}/10");
 // Console.WriteLine($"доступность: {spiderMan.Status}");
