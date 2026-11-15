@@ -1,14 +1,36 @@
 public class Hero
 {
     public string Name;
-    public int Health;
+    public int Health { get; private set; }
+    public int MaxHealth { get; private set; }
     public int Level;
     public int Experience;
 
     public Hero(string name, int health)
     {
         Name = name;
+        MaxHealth = health;
+
+        if (MaxHealth <= 0)
+        {
+            MaxHealth = 100;
+        }
+        if (MaxHealth > 200)
+        {
+            MaxHealth = 200;
+        }
+
         Health = health;
+
+        if (Health < 0)
+        {
+            Health = 0;
+        }
+        if (Health > MaxHealth)
+        {
+            Health = MaxHealth;
+        }
+
         Level = 1;
         Experience = 0;
     }
@@ -32,7 +54,13 @@ public class Hero
         {
             return;
         }
+        int missingHealth = MaxHealth - Health;
 
+        if (amount >= missingHealth)
+        {
+            Health = MaxHealth;
+            return;
+        }
         Health += amount;
     }
 
@@ -45,7 +73,7 @@ public class Hero
 
         Experience += amount;
     }
-    
+
     public bool IsAlive()
     {
         return Health > 0;
