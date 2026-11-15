@@ -11,6 +11,28 @@ Console.WriteLine(artem.GetInfo());
 Console.WriteLine();
 Console.WriteLine(alexander.GetInfo());
 
+Hero spacedProbe = new Hero("   Александр   ", 150);
+Hero emptyProbe = new Hero("   ", 100);
+
+Console.WriteLine($"Имя с пробелами: [{spacedProbe.Name}]");
+Console.WriteLine($"Пустая запись: [{emptyProbe.Name}]");
+
+yaroslav.GainExperience(40);
+yaroslav.GainExperience(-10);
+yaroslav.GainExperience(2147483647);
+Console.WriteLine($"После проверок опыта: {yaroslav.Experience}");
+
+
+// //практическая 3. Исправление ошибок
+// public int Health { get; private set; }
+// public int Health { get; set; }
+// //Из-за публичного set код в Program.cs может напрямую присвоить полю некорректное значение
+
+// _name = value.Trim();
+// value.Trim();
+// _name = value;
+// //Метод value.Trim() не меняет исходную строку value, а создаёт и возвращает новую строку без пробелов по краям. Поскольку результат никуда не был записан, в поле _name сохранилась исходная строка с пробелами.
+
 //Самостоятельная работа
 
 // Film interstellar = new Film("Интерстеллар", 2014, "Научная фантастика", 8.7);
