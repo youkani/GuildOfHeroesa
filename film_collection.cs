@@ -3,7 +3,7 @@ public class Film
     public string Name;
     public int Data;
     public string Genre;
-    public double Rating;
+    public double Rating { get; private set; }
     public string Status;
 
     public Film(string name, int data, string genre, double rating)
@@ -13,6 +13,19 @@ public class Film
         Genre = genre;
         Rating = rating;
         Status = "Доступен";
+
+        if (rating < 0)
+        {
+            Rating = 0;
+        }
+        else if (rating > 10)
+        {
+            Rating = 10;
+        }
+        else
+        {
+            Rating = rating;
+        }
     }
 
     public void UpdateRating(double newRating)
@@ -21,7 +34,6 @@ public class Film
         {
             return;
         }
-
         Rating = newRating;
     }
 

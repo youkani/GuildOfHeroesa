@@ -3,6 +3,11 @@ Hero anastasia = new Hero("Анастасия", 90);
 Hero artem = new Hero("Артём", 120);
 Hero alexander = new Hero("Александр", 150);
 
+alexander.TakeDamage(10);
+alexander.Heal(10);
+
+Console.WriteLine(">>> Участники готовы <<<");
+Console.WriteLine();
 Console.WriteLine(yaroslav.GetInfo());
 Console.WriteLine();
 Console.WriteLine(anastasia.GetInfo());
@@ -10,32 +15,12 @@ Console.WriteLine();
 Console.WriteLine(artem.GetInfo());
 Console.WriteLine();
 Console.WriteLine(alexander.GetInfo());
-
-Hero spacedProbe = new Hero("   Александр   ", 150);
-Hero emptyProbe = new Hero("   ", 100);
-
-Console.WriteLine($"Имя с пробелами: [{spacedProbe.Name}]");
-Console.WriteLine($"Пустая запись: [{emptyProbe.Name}]");
-
-yaroslav.GainExperience(40);
-yaroslav.GainExperience(-10);
-yaroslav.GainExperience(2147483647);
-Console.WriteLine($"После проверок опыта: {yaroslav.Experience}");
-
-
-// //практическая 3. Исправление ошибок
-// public int Health { get; private set; }
-// public int Health { get; set; }
-// //Из-за публичного set код в Program.cs может напрямую присвоить полю некорректное значение
-
-// _name = value.Trim();
-// value.Trim();
-// _name = value;
-// //Метод value.Trim() не меняет исходную строку value, а создаёт и возвращает новую строку без пробелов по краям. Поскольку результат никуда не был записан, в поле _name сохранилась исходная строка с пробелами.
+Console.WriteLine($"Предел здоровья Александра: {alexander.MaxHealth}");
 
 //Самостоятельная работа
 
 // Film interstellar = new Film("Интерстеллар", 2014, "Научная фантастика", 8.7);
+// Film shutterIsland = new Film("Остров проклятых", 2009, "Триллер", 8.6);
 // Film spiderMan = new Film("Человек-паук: Новый день", 2026, "Приключения", 7.9);
 
 // interstellar.ChangeStatus("Просмотрен");
@@ -50,6 +35,14 @@ Console.WriteLine($"После проверок опыта: {yaroslav.Experience
 // Console.WriteLine($"В топе (рейтинг >= 8.0): {interstellar.IsTopRated()}");
 
 // Console.WriteLine();
+// Console.WriteLine($"<<Фильм {shutterIsland.Name}>>");
+// Console.WriteLine($"{shutterIsland.Data} года создания");
+// Console.WriteLine($"Жанр: {shutterIsland.Genre}");
+// Console.WriteLine($"Оценка: {shutterIsland.Rating}/10");
+// Console.WriteLine($"доступность: {shutterIsland.Status}");
+// Console.WriteLine($"В топе (рейтинг >= 8.0): {shutterIsland.IsTopRated()}");
+
+// Console.WriteLine();
 // Console.WriteLine($"<<Фильм {spiderMan.Name}>>");
 // Console.WriteLine($"{spiderMan.Data} года создания");
 // Console.WriteLine($"Жанр: {spiderMan.Genre}");
@@ -57,18 +50,12 @@ Console.WriteLine($"После проверок опыта: {yaroslav.Experience
 // Console.WriteLine($"доступность: {spiderMan.Status}");
 // Console.WriteLine($"В топе (рейтинг >= 8.0): {spiderMan.IsTopRated()}");
 
-// Console.WriteLine();
-// Console.WriteLine($"Фильм: {interstellar.Name}. Изначальный рейтинг: {interstellar.Rating}");
-
-// interstellar.UpdateRating(9.2);
-// Console.WriteLine($"Рейтинг после обновления: {interstellar.Rating}");
+//проверки самостоятельной работы
 
 // interstellar.UpdateRating(15.0);
-// Console.WriteLine($"Рейтинг после попытки поставить 15.0: {interstellar.Rating}");
-
-//практическая 2. Найдите и исправьте две ошибки
-// yaroslav.TakeDamage(20);
-//"yaroslav.TakeDamage();" В скобках при вызове метода нужно написать аргумент.
-
-// Console.WriteLine(yaroslav.GetInfo());
-//"yaroslav.GetInfo();" Метод возвращает строку с данными но не выводит её.
+// Console.WriteLine($"Фильм: {interstellar.Name}. Проверка  рейтинга 15.0: {interstellar.Rating}");
+// interstellar.UpdateRating(10.0);
+// Console.WriteLine($"Проверка  рейтинга 10.0: {interstellar.Rating}");
+// interstellar.UpdateRating(-5.0);
+// Console.WriteLine($"Проверка  рейтинга -5.0: {interstellar.Rating}");
+// interstellar.Rating = 100;

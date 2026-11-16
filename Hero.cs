@@ -7,7 +7,6 @@ public class Hero
         {
             return _name;
         }
-
         private set
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -15,7 +14,6 @@ public class Hero
                 _name = "Безымянный герой";
                 return;
             }
-
             _name = value.Trim();
         }
     }
@@ -83,15 +81,18 @@ public class Hero
         Health += amount;
     }
 
-    public void GainExperience(int amount) {
-    if (amount <= 0) {
-        return;
+    public void GainExperience(int amount)
+    {
+        if (amount <= 0)
+        {
+            return;
+        }
+        if (amount > 2147483647 - Experience)
+        {
+            return;
+        }
+        Experience += amount;
     }
-    if (amount > 2147483647 - Experience) {
-        return;
-    }
-    Experience += amount;
-}
 
     public bool IsAlive()
     {
