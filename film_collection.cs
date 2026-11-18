@@ -51,3 +51,12 @@ public class Film
         return Rating >= 8.0;
     }
 }
+
+public class FilmCollection {
+    public string Name { get; private set; }
+    public List<Film> Films { get; private set; } = new List<Film>();
+
+    public FilmCollection(string name) {
+        Name = name;
+    }
+}

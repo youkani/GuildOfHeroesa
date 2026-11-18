@@ -24,40 +24,64 @@ if (guild.Heroes.Count > 0) {
 }
 
 Console.WriteLine();
-foreach (Hero hero in guild.Heroes) {
+foreach (Hero hero in guild.Heroes)
+{
     Console.WriteLine(hero.GetInfo());
     Console.WriteLine();
 }
 
+int strongCount = 0;
+foreach (Hero hero in guild.Heroes) {
+    if (hero.Health >= 120) {
+        strongCount += 1;
+    }
+}
+Console.WriteLine($"Могут нести тяжёлые ящики (здоровье от 120): {strongCount}");
+
+if (guild.Heroes.Count > 0) {
+    Hero strongest = guild.Heroes[0];
+    foreach (Hero hero in guild.Heroes) {
+        if (hero.Health > strongest.Health) {
+            strongest = hero;
+        }
+    }
+Console.WriteLine($"Самый здоровый: {strongest.Name} ({strongest.Health})");
+}
+
 //Самостоятельная работа
 
-// Film interstellar = new Film("Интерстеллар", 2014, "Научная фантастика", 8.7);
-// Film shutterIsland = new Film("Остров проклятых", 2009, "Триллер", 8.6);
-// Film spiderMan = new Film("Человек-паук: Новый день", 2026, "Приключения", 7.9);
+Film interstellar = new Film("Интерстеллар", 2014, "Научная фантастика", 8.7);
+Film shutterIsland = new Film("Остров проклятых", 2009, "Триллер", 8.6);
+Film spiderMan = new Film("Человек-паук: Новый день", 2026, "Приключения", 7.9);
 
-// interstellar.ChangeStatus("Просмотрен");
-// interstellar.ChangeStatus("");
+FilmCollection collection = new FilmCollection("Избранное кино");
+collection.Films.Add(interstellar);
+collection.Films.Add(shutterIsland);
+collection.Films.Add(spiderMan);
 
-// Console.WriteLine();
-// Console.WriteLine($"<<Фильм {interstellar.Name}>>");
-// Console.WriteLine($"{interstellar.Data} года создания");
-// Console.WriteLine($"Жанр: {interstellar.Genre}");
-// Console.WriteLine($"Оценка: {interstellar.Rating}/10");
-// Console.WriteLine($"доступность: {interstellar.Status}");
-// Console.WriteLine($"В топе (рейтинг >= 8.0): {interstellar.IsTopRated()}");
+Console.WriteLine($"\nВсего фильмов: {collection.Films.Count}");
+if (collection.Films.Count > 0) {
+    Console.WriteLine($"Первый: {collection.Films[0].Name}");
+    Console.WriteLine($"Последний: {collection.Films[collection.Films.Count - 1].Name}");
+}
 
-// Console.WriteLine();
-// Console.WriteLine($"<<Фильм {shutterIsland.Name}>>");
-// Console.WriteLine($"{shutterIsland.Data} года создания");
-// Console.WriteLine($"Жанр: {shutterIsland.Genre}");
-// Console.WriteLine($"Оценка: {shutterIsland.Rating}/10");
-// Console.WriteLine($"доступность: {shutterIsland.Status}");
-// Console.WriteLine($"В топе (рейтинг >= 8.0): {shutterIsland.IsTopRated()}");
+Film Matrix = new Film("Матрица", 1999, "Фантастика", 8.7);
+collection.Films.Add(Matrix);
 
-// Console.WriteLine();
-// Console.WriteLine($"<<Фильм {spiderMan.Name}>>");
-// Console.WriteLine($"{spiderMan.Data} года создания");
-// Console.WriteLine($"Жанр: {spiderMan.Genre}");
-// Console.WriteLine($"Оценка: {spiderMan.Rating}/10");
-// Console.WriteLine($"доступность: {spiderMan.Status}");
-// Console.WriteLine($"В топе (рейтинг >= 8.0): {spiderMan.IsTopRated()}");
+Console.WriteLine("\nСписок фильмов:");
+foreach (Film film in collection.Films) {
+    Console.WriteLine($"- {film.Name} ({film.Data}), жанр: {film.Genre}, рейтинг: {film.Rating}, статус: {film.Status}");
+}
+
+int FilmsCount = 0;
+foreach (Film film in collection.Films) {
+    if (film.Rating >= 8.5) {
+        FilmsCount += 1;
+    }
+}
+Console.WriteLine($"\nФильмов с рейтингом от 8.5: {FilmsCount}");
+
+interstellar.ChangeStatus("Просмотрен");
+interstellar.ChangeStatus("");
+
+Console.WriteLine($"\nИзменение состояния фильма интерстеллар: {collection.Films[0].Status}");
