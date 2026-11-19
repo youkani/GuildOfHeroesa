@@ -1,16 +1,11 @@
-public class Hero
-{
+public class Hero {
     private string _name = "Безымянный герой";
-    public string Name
-    {
-        get
-        {
+    public string Name {
+        get {
             return _name;
         }
-        private set
-        {
-            if (string.IsNullOrWhiteSpace(value))
-            {
+        private set {
+            if (string.IsNullOrWhiteSpace(value)) {
                 _name = "Безымянный герой";
                 return;
             }
@@ -23,88 +18,70 @@ public class Hero
     public int Level { get; private set; }
     public int Experience { get; private set; }
 
-    public Hero(string name, int health)
-    {
+    public Hero(string name, int health) {
         Name = name;
         MaxHealth = health;
 
-        if (MaxHealth <= 0)
-        {
+        if (MaxHealth <= 0) {
             MaxHealth = 100;
         }
-        if (MaxHealth > 200)
-        {
+        if (MaxHealth > 200) {
             MaxHealth = 200;
         }
 
         Health = health;
-
-        if (Health < 0)
-        {
+        if (Health < 0) {
             Health = 0;
         }
-        if (Health > MaxHealth)
-        {
+        if (Health > MaxHealth) {
             Health = MaxHealth;
         }
-
         Level = 1;
         Experience = 0;
     }
-    public void TakeDamage(int damage)
-    {
-        if (damage <= 0)
-        {
+    
+    public void TakeDamage(int damage) {
+        if (damage <= 0) {
             return;
         }
         Health -= damage;
 
-        if (Health < 0)
-        {
+        if (Health < 0) {
             Health = 0;
         }
     }
 
-    public void Heal(int amount)
-    {
-        if (amount <= 0)
-        {
+    public void Heal(int amount) {
+        if (amount <= 0) {
             return;
         }
         int missingHealth = MaxHealth - Health;
 
-        if (amount >= missingHealth)
-        {
+        if (amount >= missingHealth) {
             Health = MaxHealth;
             return;
         }
         Health += amount;
     }
 
-    public void GainExperience(int amount)
-    {
-        if (amount <= 0)
-        {
+    public void GainExperience(int amount) {
+        if (amount <= 0) {
             return;
         }
-        if (amount > 2147483647 - Experience)
-        {
+        if (amount > 2147483647 - Experience) {
             return;
         }
         Experience += amount;
     }
 
-    public bool IsAlive()
-    {
+    public bool IsAlive() {
         return Health > 0;
     }
 
-    public string GetInfo()
-    {
+    public string GetInfo() {
         return $">>> {Name} <<<\n" +
                $"Здоровье: {Health}\n" +
                $"Уровень: {Level}\n" +
                $"Опыт: {Experience}";
     }
-
 }
