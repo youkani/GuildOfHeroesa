@@ -50,6 +50,14 @@ public class Film
     {
         return Rating >= 8.0;
     }
+
+    public string Info()
+    {
+        return $"<<< {Name} ({Data}) >>>\n" +
+               $"Жанр: {Genre}\n" +
+               $"Рейтинг: {Rating}\n" +
+               $"Статус: {Status}\n";
+    }
 }
 
 public class FilmCollection {

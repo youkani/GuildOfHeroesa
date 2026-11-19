@@ -54,12 +54,12 @@ Film interstellar = new Film("Интерстеллар", 2014, "Научная �
 Film shutterIsland = new Film("Остров проклятых", 2009, "Триллер", 8.6);
 Film spiderMan = new Film("Человек-паук: Новый день", 2026, "Приключения", 7.9);
 
-FilmCollection collection = new FilmCollection("Избранное кино");
+FilmCollection collection = new FilmCollection("Коллекция фильмов");
 collection.Films.Add(interstellar);
 collection.Films.Add(shutterIsland);
 collection.Films.Add(spiderMan);
 
-Console.WriteLine($"\nВсего фильмов: {collection.Films.Count}");
+Console.WriteLine($"\nКоличество фильмов: {collection.Films.Count}");
 if (collection.Films.Count > 0) {
     Console.WriteLine($"Первый: {collection.Films[0].Name}");
     Console.WriteLine($"Последний: {collection.Films[collection.Films.Count - 1].Name}");
@@ -70,7 +70,7 @@ collection.Films.Add(Matrix);
 
 Console.WriteLine("\nСписок фильмов:");
 foreach (Film film in collection.Films) {
-    Console.WriteLine($"- {film.Name} ({film.Data}), жанр: {film.Genre}, рейтинг: {film.Rating}, статус: {film.Status}");
+    Console.WriteLine(film.Info());
 }
 
 int FilmsCount = 0;
