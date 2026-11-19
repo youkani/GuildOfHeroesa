@@ -48,6 +48,24 @@ if (guild.Heroes.Count > 0) {
 Console.WriteLine($"Самый здоровый: {strongest.Name} ({strongest.Health})");
 }
 
+if (guild.Heroes.Count > 0) {
+    int sumHealth = 0;
+    foreach (Hero hero in guild.Heroes) {
+        sumHealth += hero.Health;
+    }
+
+    int average = sumHealth / guild.Heroes.Count;
+    int averageCount = 0;
+
+    foreach (Hero hero in guild.Heroes) {
+        if (hero.Health > average) {
+            averageCount += 1;
+        }
+    }
+
+    Console.WriteLine($"Среднее здоровье: {average}. Здоровее среднего: {averageCount}");
+}
+
 //Самостоятельная работа
 
 Film interstellar = new Film("Интерстеллар", 2014, "Научная фантастика", 8.7);
