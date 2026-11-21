@@ -243,3 +243,59 @@ Console.WriteLine($"{probeHero.Health} и {probeList[0].Health}");
 - У двух гильдий разные списки, хотя в них один и тот же объект героя, потому что при каждом вызове new Guild(...) памяти создаётся независимый список. А метод Add не перемещает самого героя, а копирует ссылку на него в оба списка.
 
 - Без проверки `Count > 0` программа на пустой гильдии завершится с ошибкой, потому что свойство при вычислении среднего здоровья выполнится `totalHealth / 0`, что приведёт к аварийной остановке программы с ошибкой деления на ноль.
+
+## Практическая работа №5
+
+True
+False
+True
+True
+1
+2
+True
+
+Объектов `Hero` создано три. В гильдии только второй.
+`snapshot.Count` не совпадает с `MemberCount`, потому что `GetMembers()` возвращает новый отдельный список, а не ссылку на внутреннее поле `_heroes`. Удаление героя меняет только внутренний список гильдии, не затрагивая `snapshot`.
+
+Первый герой в списке выведется. Для остальных героев вернётся null.
+```cs
+foreach (Hero hero in _heroes) {
+    if (string.Equals(hero.Name, searchName, StringComparison.OrdinalIgnoreCase)) {
+        return hero;
+    }
+    return null;
+}
+return null;
+```
+Ошибка 1: `return null` внутри цикла завершает метод сразу после проверки первого элемента, поэтому до второго очередь не доходит.
+Исправление: убрать `return null` из тела `foreach`, оставив только после цикла.
+```cs
+foreach (Hero hero in _heroes) {
+    if (string.Equals(hero.Name, searchName, StringComparison.OrdinalIgnoreCase)) {
+        return hero;
+    }
+}
+return null;
+```
+
+Выведет "В гильдии: 0", вызов `copy.Clear()` снаружи полностью сотрёт состав гильдии.
+```cs
+public List<Hero> GetMembers() {
+    return _heroes;
+}
+```
+Ошибка 2: возвращается ссылка на оригинальный список `_heroes`, поэтому `private` не спасает от внешнего `copy.Clear()`.
+Исправление: создавать и возвращать новый список-копию.
+```cs
+public List<Hero> GetMembers() {
+    List<Hero> result = new List<Hero>();
+    foreach (Hero hero in _heroes) {
+        result.Add(hero);
+    }
+    return result;
+}
+```
+
+- `FindStrongest` возвращает `Hero?`, потому что в пустой гильдии самого здорового героя не существует. `CountHealthy` возвращает int, так как для пустого списка количество подходящих героев это 0.
+- Вызывающий код обязан проверить результат на `!= null` перед чтением свойств объекта, иначе возникнет `NullReferenceException`.
+
