@@ -1,5 +1,5 @@
 public class FilmCollection {
-    private List<Film> _films { get; private set; } = new List<Film>();
+    private List<Film> _films = new List<Film>();
     public string Name { get; private set; }
 
     public int FilmCount {

@@ -54,35 +54,41 @@ if (strongest != null) {
 Film interstellar = new Film("Интерстеллар", 2014, "Научная фантастика", 8.7);
 Film shutterIsland = new Film("Остров проклятых", 2009, "Триллер", 8.6);
 Film spiderMan = new Film("Человек-паук: Новый день", 2026, "Приключения", 7.9);
+Film Matrix = new Film("Матрица", 1999, "Фантастика", 8.7);
 
 FilmCollection collection = new FilmCollection("Коллекция фильмов");
-collection.Films.Add(interstellar);
-collection.Films.Add(shutterIsland);
-collection.Films.Add(spiderMan);
+collection.AddFilm(interstellar);
+collection.AddFilm(shutterIsland);
+collection.AddFilm(spiderMan);
+collection.AddFilm(Matrix);
+List<Film> films = collection.GetFilms();
 
-Console.WriteLine($"\nКоличество фильмов: {collection.Films.Count}");
-if (collection.Films.Count > 0) {
-    Console.WriteLine($"Первый: {collection.Films[0].Name}");
-    Console.WriteLine($"Последний: {collection.Films[collection.Films.Count - 1].Name}");
+Console.WriteLine($"\n<<< Самостоятельный проект >>>");
+Console.WriteLine($"Количество фильмов: {collection.FilmCount}");
+if (films.Count > 0) {
+    Console.WriteLine($"Первый: {films[0].Name}");
+    Console.WriteLine($"Последний: {films[films.Count - 1].Name}");
 }
 
-Film Matrix = new Film("Матрица", 1999, "Фантастика", 8.7);
-collection.Films.Add(Matrix);
-
-Console.WriteLine("\nСписок фильмов:");
-foreach (Film film in collection.Films) {
-    Console.WriteLine(film.Info());
+Console.WriteLine();
+foreach (Film i in films)
+{
+    Console.WriteLine(i.Info());
 }
 
-int FilmsCount = 0;
-foreach (Film film in collection.Films) {
-    if (film.Rating >= 8.5) {
-        FilmsCount += 1;
-    }
-}
-Console.WriteLine($"\nФильмов с рейтингом от 8.5: {FilmsCount}");
+Console.WriteLine($"Фильмов с рейтингом от 8.5: {collection.CountTopRated(8.5)}");
 
 interstellar.ChangeStatus("Просмотрен");
-interstellar.ChangeStatus("");
+Console.WriteLine($"Изменение состояния фильма интерстеллар: {collection.GetFilms()[0].Status}");
 
-Console.WriteLine($"\nИзменение состояния фильма интерстеллар: {collection.Films[0].Status}");
+Film? foundFilm = collection.FindFilmByName("  остРов проклЯтЫх  ");
+Console.WriteLine($"Повтор фильма интерстеллар принят: {collection.AddFilm(interstellar)}");
+
+if (foundFilm != null) {
+    Console.WriteLine($"Найден фильм по запросу `  остРов проклЯтЫх  `: {foundFilm.Name}");
+} else {
+    Console.WriteLine("Фильм не найден.");
+}
+
+Console.WriteLine($"Удалён фильм Матрица: {collection.RemoveFilm("Матрица")}");
+Console.WriteLine($"Фильмов после проверок: {collection.FilmCount}");
