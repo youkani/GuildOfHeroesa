@@ -47,29 +47,39 @@ public class Guild {
         }
         return _heroes.Remove(hero);
     }
-    
+
     public int CountHealthy(int minimum) {
-    int count = 0;
+        int count = 0;
+        foreach (Hero hero in _heroes) {
+            if (hero.Health >= minimum) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+public List<Hero> SelectHealthy(int minimum) {
+    List<Hero> result = new List<Hero>();
     foreach (Hero hero in _heroes) {
         if (hero.Health >= minimum) {
-            count++;
+            result.Add(hero);
         }
     }
-    return count;
+    return result;
 }
 
-public Hero? FindStrongest() {
-    if (_heroes.Count == 0) {
-        return null;
-    }
-
-    Hero strongest = _heroes[0];
-    foreach (Hero hero in _heroes) {
-        if (hero.Health > strongest.Health) {
-            strongest = hero;
+    public Hero? FindStrongest() {
+        if (_heroes.Count == 0) {
+            return null;
         }
+
+        Hero strongest = _heroes[0];
+        foreach (Hero hero in _heroes) {
+            if (hero.Health > strongest.Health) {
+                strongest = hero;
+            }
+        }
+        return strongest;
     }
-    return strongest;
-}
 
 }
