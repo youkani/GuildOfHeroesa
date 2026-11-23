@@ -64,11 +64,15 @@ public class Hero {
         Health += amount;
     }
 
-    public void GainExperience(int amount) {
+    public bool CanGainExperience(int amount) {
         if (amount <= 0) {
-            return;
+            return false;
         }
-        if (amount > 2147483647 - Experience) {
+        return amount <= int.MaxValue - Experience;
+    }
+
+    public void GainExperience(int amount) {
+        if (!CanGainExperience(amount)) {
             return;
         }
         Experience += amount;
