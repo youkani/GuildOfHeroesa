@@ -32,6 +32,9 @@ public class Quest {
         if (AssignedHero != null) {
             return false;
         }
+        if (!hero.IsAlive()) {
+            return false;
+        }
         if (hero.Health < MinHealth) {
             return false;
         }
@@ -43,7 +46,6 @@ public class Quest {
         if (IsCompleted) {
             return false;
         }
-
         Hero? hero = AssignedHero;
         if (hero == null) {
             return false;
@@ -62,4 +64,15 @@ public class Quest {
         return true;
     }
 
+    public string GetInfo() {
+        string heroText = "не назначен";
+        if (AssignedHero != null) {
+            heroText = AssignedHero.Name;
+        }
+        string doneText = "нет";
+        if (IsCompleted) {
+            doneText = "да";
+        }
+        return $"№{Id} «{Title}»: исполнитель {heroText}, выполнено: {doneText}";
+    }
 }
