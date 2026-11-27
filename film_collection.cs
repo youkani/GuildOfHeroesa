@@ -1,5 +1,7 @@
 public class FilmCollection {
     private List<Film> _films = new List<Film>();
+    private List<Viewing> _viewings = new List<Viewing>();
+
     public string Name { get; private set; }
 
     public int FilmCount {
@@ -50,12 +52,39 @@ public class FilmCollection {
     public int CountTopRated(double minRating) {
         int count = 0;
         foreach (Film i in _films) {
-            if (i.Rating >= minRating)
-            {
+            if (i.Rating >= minRating) {
                 count += 1;
             }
         }
         return count;
+    }
+    
+    public bool AddViewing(Viewing viewing) {
+        if (viewing.Status != ViewingStatus.Open) {
+            return false;
+        }
+        _viewings.Add(viewing);
+        return true;
+    }
+
+    public bool IsFilmBusy(Film film) {
+        foreach (Viewing v in _viewings) {
+            if (v.Status == ViewingStatus.Active && v.SelectedFilm == film) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool TryStartViewing(Viewing viewing, string filmName) {
+        Film? film = FindFilmByName(filmName);
+        if (film == null) {
+            return false;
+        }
+        if (IsFilmBusy(film)) {
+            return false;
+        }
+        return viewing.TryStart(film);
     }
 }
 
@@ -63,7 +92,7 @@ public class Viewing {
     public int Id { get; private set; }
     public double MinRating { get; private set; }
     public Film? SelectedFilm { get; private set; }
-    public bool IsCompleted { get; private set; }
+    public ViewingStatus Status { get; private set; }
 
     public Viewing(int id, double minRating) {
         Id = id;
@@ -73,11 +102,11 @@ public class Viewing {
             MinRating = minRating;
         }
         SelectedFilm = null;
-        IsCompleted = false;
+        Status = ViewingStatus.Open;
     }
 
     public bool TryStart(Film film) {
-        if (IsCompleted) {
+        if (Status != ViewingStatus.Open) {
             return false;
         }
         if (SelectedFilm != null) {
@@ -90,11 +119,12 @@ public class Viewing {
             return false;
         }
         SelectedFilm = film;
+        Status = ViewingStatus.Active;
         return true;
     }
 
     public bool TryFinish() {
-        if (IsCompleted) {
+        if (Status != ViewingStatus.Active) {
             return false;
         }
         Film? film = SelectedFilm;
@@ -102,7 +132,23 @@ public class Viewing {
             return false;
         }
         film.ChangeStatus("Просмотрен");
-        IsCompleted = true;
+        Status = ViewingStatus.Completed;
         return true;
     }
+    
+    public bool TryCancel() {
+        if (Status != ViewingStatus.Open && Status != ViewingStatus.Active) {
+            return false;
+        }
+        Status = ViewingStatus.Cancelled;
+        return true;
+    }
+}
+
+public enum ViewingStatus
+{
+    Open,
+    Active,
+    Completed,
+    Cancelled
 }

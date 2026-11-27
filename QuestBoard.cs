@@ -1,140 +1,123 @@
-public class QuestBoard
-{
+public class QuestBoard {
     private readonly Guild _guild;
     private readonly List<Quest> _quests = new List<Quest>();
 
-    public QuestBoard(Guild guild)
-    {
+    public QuestBoard(Guild guild) {
         _guild = guild;
     }
 
-    public bool AddQuest(Quest quest)
-    {
-        if (quest.Status != QuestStatus.Open)
-        {
+    public bool AddQuest(Quest quest) {
+        if (quest.Status != QuestStatus.Open) {
             return false;
         }
-        if (FindQuest(quest.Id) != null)
-        {
+        if (FindQuest(quest.Id) != null) {
             return false;
         }
         _quests.Add(quest);
         return true;
     }
 
-    public Quest? FindQuest(int questId)
-    {
-        foreach (Quest quest in _quests)
-        {
-            if (quest.Id == questId)
-            {
+    public Quest? FindQuest(int questId) {
+        foreach (Quest quest in _quests) {
+            if (quest.Id == questId) {
                 return quest;
             }
         }
         return null;
     }
 
-    public bool TryAssign(int questId, string heroName)
-    {
+    public bool TryAssign(int questId, string heroName) {
         Quest? quest = FindQuest(questId);
-        if (quest == null)
-        {
+        if (quest == null) {
             return false;
         }
         Hero? hero = _guild.FindHeroByName(heroName);
-        if (hero == null)
-        {
+        if (hero == null) {
             return false;
         }
-        if (IsAssigned(hero))
-        {
+        if (IsAssigned(hero)) {
             return false;
         }
         return quest.TryAssign(hero);
     }
 
-    public bool TryComplete(int questId)
-    {
+    public bool TryComplete(int questId) {
         Quest? quest = FindQuest(questId);
-        if (quest == null)
-        {
+        if (quest == null) {
             return false;
         }
         return quest.TryComplete();
     }
 
-    public bool TryCancel(int questId)
-    {
+    public bool TryCancel(int questId) {
         Quest? quest = FindQuest(questId);
-        if (quest == null)
-        {
+        if (quest == null) {
             return false;
         }
         return quest.TryCancel();
     }
 
-    public List<Quest> GetQuests()
-    {
+    public List<Quest> GetQuests() {
         return new List<Quest>(_quests);
     }
 
-    public bool IsAssigned(Hero hero)
-    {
-        foreach (Quest quest in _quests)
-        {
-            if (quest.Status == QuestStatus.Assigned && quest.AssignedHero == hero)
-            {
+    public bool IsAssigned(Hero hero) {
+        foreach (Quest quest in _quests) {
+            if (quest.Status == QuestStatus.Assigned && quest.AssignedHero == hero) {
                 return true;
             }
         }
         return false;
     }
 
-    public bool TryRemoveMember(string heroName)
-    {
+    public bool TryRemoveMember(string heroName) {
         Hero? hero = _guild.FindHeroByName(heroName);
-        if (hero == null)
-        {
+        if (hero == null) {
             return false;
         }
-        foreach (Quest quest in _quests)
-        {
-            if (quest.AssignedHero == hero)
-            {
+        foreach (Quest quest in _quests) {
+            if (quest.AssignedHero == hero) {
                 return false;
             }
         }
         return _guild.RemoveHero(hero.Name);
     }
 
-    public int CountByStatus(QuestStatus status)
-    {
+    public int CountByStatus(QuestStatus status) {
         int count = 0;
-        foreach (Quest quest in _quests)
-        {
-            if (quest.Status == status)
-            {
+        foreach (Quest quest in _quests) {
+            if (quest.Status == status) {
                 count++;
             }
         }
         return count;
     }
 
-    public Quest? FindActiveQuest(string heroName)
-    {
+    public Quest? FindActiveQuest(string heroName) {
         Hero? hero = _guild.FindHeroByName(heroName);
-        if (hero == null)
-        {
+        if (hero == null) {
             return null;
         }
-        foreach (Quest quest in _quests)
-        {
-            if (quest.Status == QuestStatus.Assigned && quest.AssignedHero == hero)
-            {
+        foreach (Quest quest in _quests) {
+            if (quest.Status == QuestStatus.Assigned && quest.AssignedHero == hero) {
                 return quest;
             }
         }
         return null;
     }
 
+    public List<Quest> GetQuestsOf(string heroName) {
+        List<Quest> result = new List<Quest>();
+
+        Hero? hero = _guild.FindHeroByName(heroName);
+        if (hero == null) {
+            return result;
+        }
+        foreach (Quest quest in _quests) {
+            if (quest.AssignedHero == hero) {
+                result.Add(quest);
+            }
+        }
+        return result;
+    }
 }
